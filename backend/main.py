@@ -6,12 +6,12 @@ from backend.database import SessionLocal, Wallet, init_db
 from backend.reputation_engine import calculate_reputation
 from backend.ranking.ranking_engine import get_ranking
 
-# Carrega variáveis do arquivo .env (apenas em desenvolvimento)
+# Carrega variáveis de ambiente do arquivo .env (apenas desenvolvimento)
 load_dotenv()
 
 app = FastAPI()
 
-# Configurar CORS (em produção, restrinja para o domínio do frontend)
+# Configuração do CORS – em produção, defina ALLOW_ORIGINS com os domínios permitidos
 allow_origins = os.getenv("ALLOW_ORIGINS", "*").split(",")
 app.add_middleware(
     CORSMiddleware,
@@ -22,6 +22,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 def startup():
+    """Inicializa o banco de dados (cria tabelas se não existirem)."""
     init_db()
 
 @app.get("/")
@@ -30,18 +31,26 @@ def home():
 
 @app.get("/ranking")
 def ranking(limit: int = 50):
+    """Retorna o ranking das top carteiras."""
     return get_ranking(limit)
 
 @app.get("/analyze/{wallet}")
 def analyze(wallet: str):
+    """
+    Analisa uma carteira: calcula a reputação em tempo real e salva no banco.
+    """
     if not wallet.startswith("0x") or len(wallet) != 42:
         raise HTTPException(status_code=400, detail="Endereço inválido")
 
     db = SessionLocal()
     try:
+        # Verifica se a carteira já existe no banco
         wallet_db = db.query(Wallet).filter(Wallet.address == wallet).first()
+
+        # Calcula reputação (usa dados do banco se disponíveis)
         result = calculate_reputation(wallet, db)
 
+        # Salva ou atualiza a carteira
         if wallet_db is None:
             wallet_db = Wallet(address=wallet)
             db.add(wallet_db)
