@@ -1,0 +1,98 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* BODY */
+body {
+    background: linear-gradient(135deg, #020617, #0f172a, #020617);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+}
+
+/* CONTAINER */
+.container {
+    width: 900px;
+    max-width: 95%;
+}
+
+/* TÍTULO */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+    color: #38bdf8;
+}
+
+/* CARDS */
+.card {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* BOTÃO */
+button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1d4ed8;
+    transform: scale(1.03);
+}
+
+/* ENDEREÇO DA CARTEIRA */
+#walletAddress {
+    margin-top: 15px;
+    font-size: 14px;
+    word-break: break-all;
+    color: #94a3b8;
+}
+
+#result p {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* RANKING */
+#ranking .card {
+    background: #0f172a;
+}
+
+.ranking-row {
+    padding: 10px;
+    border-bottom: 1px solid #1e293b;
+    font-size: 14px;
+}
+
+.ranking-row:last-child {
+    border-bottom: none;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+    .container {
+        width: 100%;
+    }
+}

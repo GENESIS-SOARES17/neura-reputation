@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neura Reputation Protocol</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Neura Reputation Protocol</h1>
+        <p>Analise a reputação de carteiras na Neura Testnet</p>
+
+        <!-- Botão para conectar carteira via extensão -->
+        <button id="connectWallet">Conectar Carteira</button>
+        <p id="walletAddress"></p>
+
+        <!-- Área para inserir endereço manualmente (alternativa sem extensão) -->
+        <div style="margin-top: 20px;">
+            <input type="text" id="manualAddress" placeholder="0x... (endereço da carteira)" 
+                   style="width: 70%; padding: 10px; background: #1e293b; color: white; border: 1px solid #334155; border-radius: 4px;">
+            <button id="analyzeManual" style="margin-left: 10px;">Analisar Endereço</button>
+        </div>
+
+        <div id="result"></div>
+        <div id="ranking"></div>
+
+        <div class="card">
+            <h2>Análise da Carteira</h2>
+            <canvas id="scoreChart"></canvas>
+            <br>
+            <canvas id="volumeChart"></canvas>
+            <br>
+            <canvas id="activityChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Ethers.js (para conectar MetaMask) -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Scripts do projeto -->
+    <script src="charts.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
